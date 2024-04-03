@@ -12,7 +12,7 @@ const ECommerce: React.FC = () => {
   const [data, setData] = useState<dataBase[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [totalDomains, setTotalDomains] = useState<number>(0);
-  const [filterStatus, setFilterStatus] = useState<string>("Todos");
+  const [filterStatus, setFilterStatus] = useState<string>("Fora da Casa");
   const [filterAnalyst, setFilterAnalyst] = useState<string>("");
   const [filterAnalystCsm, setFilterAnalystCsm] = useState<string>("");
 
@@ -92,7 +92,7 @@ const ECommerce: React.FC = () => {
       <div className="rounded-sm border border-stroke p-3 bg-white py-6 px-7.5 shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="flex items-end justify-between">
           <div>
-            <span className="text-lg font-bold">Filtrar por status:</span>
+            <span className="text-lg font-bold mr-2">Filtrar por status:</span>
             <select
               className="text-sm font-semibold rounded-sm border border-stroke bg-white py-2 px-2 shadow-default dark:border-strokedark dark:bg-boxdark"
               value={filterStatus}
@@ -110,7 +110,7 @@ const ECommerce: React.FC = () => {
           </div>
 
           <div>
-            <span className="text-lg font-bold">Filtrar por analista CSM:</span>
+            <span className="text-lg font-bold mr-2">Filtrar por analista CSM:</span>
             <select
               className="text-sm font-semibold rounded-sm border border-stroke bg-white py-2 px-2 shadow-default dark:border-strokedark dark:bg-boxdark"
               value={filterAnalystCsm}
@@ -129,7 +129,7 @@ const ECommerce: React.FC = () => {
           </div>
 
           <div>
-            <span className="text-lg font-bold">Filtrar por analista CS:</span>
+            <span className="text-lg font-bold mr-2">Filtrar por analista CS:</span>
             <select
               className="text-sm font-semibold rounded-sm border border-stroke bg-white py-2 px-2 shadow-default dark:border-strokedark dark:bg-boxdark"
               value={filterAnalyst}

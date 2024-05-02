@@ -1,0 +1,17 @@
+# Use a imagem oficial do Node.js como base
+FROM node:21.5.0
+
+# Define o diretório de trabalho dentro do contêiner
+WORKDIR /usr/src/app
+
+# Copia os arquivos do projeto para o diretório de trabalho
+COPY . .
+
+# Executa o comando npm install para instalar as dependências
+RUN npm install
+
+# Expõe a porta em que o servidor Node.js irá escutar (se necessário)
+EXPOSE 3333
+
+# Comando para executar o servidor quando o contêiner for iniciado
+CMD ["npm", "run", "dev"]

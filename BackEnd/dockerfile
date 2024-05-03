@@ -11,7 +11,7 @@ COPY . .
 RUN npm install
 
 # Expõe a porta em que o servidor Node.js irá escutar (se necessário)
-EXPOSE 3333
+EXPOSE 3000
 
 # Comando para executar o servidor quando o contêiner for iniciado
 CMD ["npm", "run", "dev"]

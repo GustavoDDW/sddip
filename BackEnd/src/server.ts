@@ -23,7 +23,7 @@ async function bootstrap() {
 
     await fastify.register(loginRoute)
     
-    await fastify.listen({ port: 3333, host: '0.0.0.0' });
+    await fastify.listen({ port: 3000, host: '0.0.0.0' });
 
     // Executar a rota GetSense todos os dias às 15:05
     cron.schedule('0 9 * * *', async () => {

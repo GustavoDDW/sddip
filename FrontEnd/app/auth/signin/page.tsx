@@ -5,11 +5,6 @@ import { Metadata } from "next";
 import { ToastContainer, toast } from "react-toastify";
 import { Spinner } from "react-bootstrap";
 import { jwtDecode } from "jwt-decode";
-export const metadata: Metadata = {
-  title: "SDIP",
-  description: "Pagina destinada a logar os usuários na plataforma.",
-  // other metadata
-};
 
 interface JwtPayload {
   infoUser: {

@@ -11,10 +11,17 @@ export const metadata: Metadata = {
   // other metadata
 };
 
+interface JwtPayload {
+  infoUser: {
+    userName: string;
+    // outras propriedades...
+  };
+}
+
 const SignIn: React.FC = () => {
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
-  const [loading, setLoading] = useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState<React.ReactNode>(null);
 
   function validate() {
     if (!email && !password) {
@@ -60,7 +67,7 @@ const SignIn: React.FC = () => {
     return true;
   }
 
-  async function handleLogin(e) {
+  async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (validate()) {
       setLoading(<Spinner id="loading" animation="border" />);
@@ -77,8 +84,8 @@ const SignIn: React.FC = () => {
         .then((response) => response.json())
         .then((data) => {
           // Aqui você pode manipular os dados recebidos
-          const dataToken = jwtDecode(data.token);
-          sessionStorage.setItem("login", true);
+          const dataToken: JwtPayload = jwtDecode(data.token);
+          sessionStorage.setItem("login", "true");
           sessionStorage.setItem("userName", dataToken.infoUser.userName);
           sessionStorage.setItem("email", email);
           alert(`Seja bem vindo!`);
@@ -87,14 +94,13 @@ const SignIn: React.FC = () => {
           return;
         })
         .catch((err) => {
-          setLoading("");
+          setLoading(null); // Limpa o estado de loading
           console.log(err);
 
           alert("Usuário ou senha invalidos!");
         });
     }
   }
-
   return (
     <>
       <Breadcrumb pageName="Login" />
@@ -234,7 +240,7 @@ const SignIn: React.FC = () => {
                 Login
               </h2>
 
-              <form>
+              <form onSubmit={handleLogin}>
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
                     Email
@@ -244,7 +250,7 @@ const SignIn: React.FC = () => {
                       type="email"
                       placeholder="Digite o seu email"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                      onChange={(e) => {
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         setEmail(e.target.value);
                       }}
                     />
@@ -278,7 +284,7 @@ const SignIn: React.FC = () => {
                       type="password"
                       placeholder="Digite sua senha"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                      onChange={(e) => {
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         setPassword(e.target.value);
                       }}
                     />
@@ -309,7 +315,7 @@ const SignIn: React.FC = () => {
 
                 <div className="mb-5">
                   <button
-                    onClick={handleLogin}
+                    type="submit"
                     className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
                   >
                     Entrar

@@ -17,7 +17,7 @@ const ECommerce: React.FC = () => {
   const [filterAnalystCsm, setFilterAnalystCsm] = useState<string>("");
 
   useEffect(() => {
-    fetch("http://sdip.mpitemporario.com.br:3000/ip")
+    fetch("http://localhost:3333/ip")
       .then((res) => res.json())
       .then((data: dataBase[]) => {
         setData(data);

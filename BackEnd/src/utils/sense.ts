@@ -7,8 +7,8 @@ interface Customer {
   servidor_hospedado: string | string[];
   id_legacy: string; // Adicionado id_legacy
   stage: string; // Adicionado stage
-  cs: { name: string }; // Adicionado cs.name
-  csm: { name: string }; // Adicionado csm.name
+  cs: { name: string, email: string }; // Adicionado cs.name
+  csm: { name: string, email: string }; // Adicionado csm.name
 }
 
 // FUNÇÃO CONEXÃO COM API SENSEDATA
@@ -50,7 +50,9 @@ export async function fetchAndSaveCustomerData(): Promise<void> {
             id_legacy: customer.id_legacy,
             stage: customer.stage,
             cs: { name: customer.cs.name },
+            cs_email: { name: customer.cs.email },
             csm: { name: customer.csm.name },
+            csm_email: { name: customer.csm.email },
           }))
       );
       currentPage = customerJSON.next_page;

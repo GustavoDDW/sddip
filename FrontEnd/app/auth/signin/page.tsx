@@ -69,7 +69,7 @@ const SignIn: React.FC = () => {
 
       const dados = { email, password };
       console.log(dados);
-      fetch("http://sdip.mpitemporario.com.br:3000/login", {
+      fetch("http://localhost:3333/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -98,7 +98,7 @@ const SignIn: React.FC = () => {
   }
   return (
     <>
-      <Breadcrumb pageName="Login" />
+      <Breadcrumb  pageName="Login" />
 
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="flex flex-wrap items-center">

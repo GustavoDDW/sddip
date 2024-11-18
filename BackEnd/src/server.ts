@@ -5,6 +5,8 @@ import { GetSense } from "./controllers/GetSenseController";
 import { userRoute } from "./controllers/userController";
 import { loginRoute } from "./controllers/loginController";
 import cron from 'node-cron';
+import { SslSaveRoute } from "./controllers/getSslController";
+import { getSslController } from "./controllers/sslController";
 
 async function bootstrap() {
     const fastify = Fastify({
@@ -14,16 +16,20 @@ async function bootstrap() {
     await fastify.register(cors, {
         origin: true,
     })
-    
+
     await fastify.register(IpRoute);
 
     await fastify.register(GetSense);
 
-    await fastify.register(userRoute)
+    await fastify.register(userRoute);
 
-    await fastify.register(loginRoute)
+    await fastify.register(loginRoute);
     
-    await fastify.listen({ port: 3000, host: '0.0.0.0' });
+    await fastify.register(SslSaveRoute);
+
+    await fastify.register(getSslController);
+
+    await fastify.listen({ port: 3333, host: '0.0.0.0' });
 
     // Executar a rota GetSense todos os dias às 15:05
     cron.schedule('0 9 * * *', async () => {
@@ -37,6 +43,8 @@ async function bootstrap() {
             console.error('Erro ao executar a rota GetSense:', error);
         }
     });
+
+
 }
 
 bootstrap();
